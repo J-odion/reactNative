@@ -4,7 +4,7 @@ import React from "react";
 export default function Todo({item, pressHandler}) {
     return (
         <TouchableOpacity onPress={() => pressHandler(item.key)}>
-            <Text style={styles.items}>{item.text} here</Text>
+            <Text style={styles.items}>{item.text}</Text>
         </TouchableOpacity>
     );
 } 
