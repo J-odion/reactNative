@@ -1,53 +1,48 @@
 import { StatusBar } from 'expo-status-bar';
 import  { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, FlatList, TouchableOpacity } from 'react-native';
+import AddTodo from './components/AddTodo';
+import Header from './components/Header';
+import Todo from './components/Todo';
 
 export default function App() {
 
-  const [name, setName] = useState('John');
-  const [age, setAge] = useState('24');
-  const [test, setTest] = useState('Math');
-  const [score, setScore] = useState('45');
-  const [people, setPeople] = useState([
-    { name: 'Shaun', id: '1' },
-    { name: 'Trust', id: '2' },
-    { name: 'Freedom', id: '3' },
-    { name: 'Grace', id: '4' },
-    { name: 'Oyetola', id: '5' },
-    { name: 'Todd', id: '6' },
-    { name: 'Fred', id: '7' },
-    { name: 'emmanuel', id: '8'}
+  const [todos, setTodos] = useState([
+    { text: 'i will like to trust and believe Shaun', key: '1' },
+    { text: 'i will like to trust and believe Trust', key: '2' },
+    { text: 'i will like to trust and believe Freedom', key: '3' },
   ])
-  const pressHandler = (id) => {
-    setPeople((prevPeople) => {
-      return prevPeople.filter(person => person.id != id);
-    })
+  
+  const pressHandler = (key) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter(todos => todos.key != key);
+    });
+  }
+  const submitHandler = (text) => {
+    setTodos((prevTodos) => {
+      return [
+        {text: text, key: Math.random().toString()},
+        ...prevTodos
+      ]
+    });
   }
 
   return (
     <View >
-      <FlatList
-        keyExtractor={(item)=> item.id}
-        data={people}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => pressHandler(item.id)}>
-            <Text style={styles.item}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
-        numColumns={3}
-      />
-
-      {/* <ScrollView>
-        
-        
-        {people.map((item) => {
-          return (
-            <View key={item.key}>
-              <Text style={styles.item}>{item.name}</Text>
-            </View>
-          )
-        })}
-      </ScrollView> */}
+      {/* header  */}
+      <Header />
+      <View style={styles.form}>
+        {/* todo form */}
+        <AddTodo submitHandler={submitHandler} />
+        <View style= {styles.contens}>
+          <FlatList
+            data={todos}
+            renderItem={({item}) => (
+              <Todo item={item} pressHandler={pressHandler} />
+            )}
+          />
+        </View>
+      </View>
     </View>
   );
 }
@@ -59,19 +54,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  input: {
-    borderWidth: 1,
-    width: 200,
-    padding: 10,
-    margin: 10,
+  form: {
+    marginVertical: 10,
   },
-  item: {
-    fontSize: 24,
-    backgroundColor: 'pink',
-    padding: 5,
-    marginTop: 10,
-    height: 80,
-    margin: 10,
-    width: 110
-  }
+  contens: {
+    marginVertical: 10,
+  },
+  
+  
 });
