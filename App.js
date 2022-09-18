@@ -44,7 +44,7 @@ export default function App() {
 
   return (
     <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
-      <View>
+      <View style={styles.container}>
         {/* header  */}
         <Header />
         <View style={styles.form}>
@@ -69,13 +69,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
   form: {
     marginVertical: 10,
+    flex: 1,
   },
   contens: {
-    marginVertical: 10,
+    marginTop: 10,
+    flex: 1,
   },
 });
