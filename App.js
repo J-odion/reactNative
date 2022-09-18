@@ -15,6 +15,7 @@ import AddTodo from "./components/AddTodo";
 import Header from "./components/Header";
 import Todo from "./components/Todo";
 
+
 export default function App() {
   const [todos, setTodos] = useState([
     { text: "i will like to trust and believe Shaun", key: "1" },
@@ -42,7 +43,7 @@ export default function App() {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss}}>
+    <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
       <View>
         {/* header  */}
         <Header />
@@ -50,6 +51,7 @@ export default function App() {
           {/* todo form */}
           <AddTodo submitHandler={submitHandler} />
           <View style={styles.contens}>
+            
             <FlatList
               data={todos}
               renderItem={({ item }) => (

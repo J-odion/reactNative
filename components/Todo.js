@@ -1,10 +1,15 @@
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
+
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function Todo({item, pressHandler}) {
     return (
         <TouchableOpacity onPress={() => pressHandler(item.key)}>
-            <Text style={styles.items}>{item.text}</Text>
+            <View style={styles.items}>
+                <Ionicons name="md-checkmark-circle" size={32} color="purple" />
+                <Text >{item.text}</Text>
+            </View>
         </TouchableOpacity>
     );
 } 
@@ -17,6 +22,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'dashed',
     padding: 15,
+    flexDirection: 'row',
     color: 'purple',
   }
 })
